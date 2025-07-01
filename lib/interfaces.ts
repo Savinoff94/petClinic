@@ -7,8 +7,10 @@ export interface IPatient {
 
 export const petTypes = ['cat', 'dog', 'parrot', 'snake', 'gold fish'] as const;
 
+export type PetType = typeof petTypes[number]
+
 export interface IPetType {
-  petType: typeof petTypes[number]
+  petType: PetType
 }
 
 export interface IPatientDashboardInfo extends IPatient, IPetType {}

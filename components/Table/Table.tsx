@@ -55,11 +55,15 @@ function Table({data} : ITable) {
       cell: (props) => {
         return <span>{yearsSince(props.getValue() as string)}</span>; 
       },
-      filterFn: 'includesString',
     },
     {
       header: "Pet type",
       accessorKey: "petType",
+      filterFn: (row, columnId, filterValue: string[]) => {
+
+        const cellValue = String(row.getValue(columnId));
+        return filterValue.includes(cellValue);
+      },
     }
   ], [])
 

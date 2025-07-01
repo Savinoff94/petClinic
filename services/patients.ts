@@ -8,7 +8,8 @@ export const fetchPatients = async (): Promise<IPatient[]> => {
     if (!res.ok) {
       throw new Error('Failed to fetch patients');
     }
-    return res.json();
+    const json = await res.json();
+    return json.patients;
 };
 
 export const seedPatients = async () => {

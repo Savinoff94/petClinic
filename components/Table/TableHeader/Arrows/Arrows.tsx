@@ -1,19 +1,28 @@
-interface IArrowsProp {
-    direction: 'asc' | 'desc' | false
+import { ArrowUpward, ArrowDownward, ArrowBack } from "@mui/icons-material";
+import { TableHeaderProps } from "../TableHeader";
+interface IArrowsProp<TData extends object, TValue> extends TableHeaderProps<TData, TValue> {
+    direction: 'asc' | 'desc' | false;
 }
-function Arrows({direction} : IArrowsProp) {
+
+function Arrows<TData extends object, TValue>({
+    header,
+    direction
+}: IArrowsProp<TData, TValue>) {
     return (
-        <div>
+        <button
+            className="flex flex-col"
+            onClick={header.column.getToggleSortingHandler()}
+        >
             {
-                !direction && <><div>{'🔼'}</div><div>{'🔽'}</div></>
+                !direction && <><ArrowBack fontSize="small" /></>
             }
             {
-                direction === 'asc' && <><div>{'🔼'}</div></>
+                direction === 'asc' && <><ArrowUpward fontSize="small" /></>
             }
             {
-                direction === 'desc' && <><div>{'🔽'}</div></>
+                direction === 'desc' && <><ArrowDownward fontSize="small" /></>
             }
-        </div>
+        </button>
     )
 }
 

@@ -13,6 +13,15 @@ import {
 import { yearsSince } from "@/lib/helpers";
 import { TableHeader } from "./TableHeader/TableHeader";
 
+import Paper from '@mui/material/Paper';
+import MuiTable from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+
+import TableRow from '@mui/material/TableRow';
+
 interface ITable {
   data: IPatient[]
 }
@@ -44,7 +53,6 @@ function Table({data} : ITable) {
       header: "Pet birth date",
       accessorKey: "petBirthDate",
       cell: (props) => {
-        console.log(props);
         return <span>{yearsSince(props.getValue() as string)}</span>; 
       },
       filterFn: 'includesString',
@@ -70,31 +78,39 @@ function Table({data} : ITable) {
   });
 
   return (
-    <table>
-      <thead>
-        {table.getHeaderGroups().map(headerGroup => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map(header => (
-              <TableHeader
-                header={header}
-                key={header.id}
-              />
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+      <MuiTable stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {table.getHeaderGroups().map(headerGroup => (
+                  headerGroup.headers.map(header => (
+                    <TableCell
+                      key={header.id}
+                    >
+                      <TableHeader
+                        header={header}
+                        key={header.id}
+                      />
+                    </TableCell>
+                  ))
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {table.getRowModel().rows.map(row => (
+              <TableRow key={row.id}>
+                {row.getVisibleCells().map(cell => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
             ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map(row => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map(cell => (
-              <td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </TableBody>
+        </MuiTable>
+      </TableContainer>
+    </Paper>
   );
 }
 

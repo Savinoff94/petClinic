@@ -86,6 +86,7 @@ function Table({data} : ITable) {
               {table.getHeaderGroups().map(headerGroup => (
                   headerGroup.headers.map(header => (
                     <TableCell
+                      className={header.id === 'name' || header.id === 'petName' ? '' : 'pt-0'}
                       key={header.id}
                     >
                       <TableHeader

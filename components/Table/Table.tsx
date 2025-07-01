@@ -48,6 +48,10 @@ function Table({data} : ITable) {
         return <span>{yearsSince(props.getValue() as string)}</span>; 
       },
       filterFn: 'includesString',
+    },
+    {
+      header: "Pet type",
+      accessorKey: "petType",
     }
   ], [])
 

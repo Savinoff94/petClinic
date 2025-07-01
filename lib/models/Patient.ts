@@ -1,12 +1,17 @@
 import mongoose, { Schema, model, models } from 'mongoose';
-import { IPatient } from '../interfaces';
+import { IPatientDashboardInfo, petTypes } from '../interfaces';
 
-const PatientSchema: Schema<IPatient> = new Schema(
+const PatientSchema: Schema<IPatientDashboardInfo> = new Schema(
   {
     name: {type: String, required: true},
     phone: {type: String, required: true},
     petName: {type: String, required: true},
     petBirthDate: {type: Date, required: true},
+    petType: { 
+      type: String, 
+      required: true, 
+      enum: petTypes as unknown as string[]
+    },
   },
   {
     timestamps: true,
@@ -14,4 +19,4 @@ const PatientSchema: Schema<IPatient> = new Schema(
 );
 
 export const PatientModel =
-  models.Patient || model<IPatient>('Patient', PatientSchema);
+  models.Patient || model<IPatientDashboardInfo>('Patient', PatientSchema);

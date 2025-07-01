@@ -1,11 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { IPatient } from "@/lib/interfaces";
+import { IPatientDashboardInfo } from "@/lib/interfaces";
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "@/lib/db";
 import { PatientModel } from "@/lib/models/Patient";
 
 interface PatientResult {
-  pateints?: Array<IPatient> | IPatient;
+  pateints?: Array<IPatientDashboardInfo> | IPatientDashboardInfo;
 }
 
 export default async function handler(

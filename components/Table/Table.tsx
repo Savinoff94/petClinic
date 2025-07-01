@@ -11,7 +11,7 @@ import {
   ColumnFiltersState,
 } from "@tanstack/react-table";
 import { yearsSince } from "@/lib/helpers";
-import { TableHeaderSortable } from "./TableHeader/TableHeader";
+import { TableHeader } from "./TableHeader/TableHeader";
 
 interface ITable {
   data: IPatient[]
@@ -21,12 +21,14 @@ interface ITable {
 function Table({data} : ITable) {
 
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
  
   const columns = useMemo<ColumnDef<IPatient>[]>(() => [
     {
       header: "Patient name",
       accessorKey: "name",
-      sortingFn: 'alphanumeric'
+      sortingFn: 'text',
+      filterFn: 'includesString',
     },
     {
       header: "Patient phone",
@@ -34,7 +36,9 @@ function Table({data} : ITable) {
     },
     {
       header: "Pet name",
-      accessorKey: "petName"
+      accessorKey: "petName",
+      sortingFn: 'text',
+      filterFn: 'includesString',
     },
     {
       header: "Pet birth date",
@@ -43,6 +47,7 @@ function Table({data} : ITable) {
         console.log(props);
         return <span>{yearsSince(props.getValue() as string)}</span>; 
       },
+      filterFn: 'includesString',
     }
   ], [])
 
@@ -51,10 +56,13 @@ function Table({data} : ITable) {
     data: data,
     state: {
       sorting,
+      columnFilters,
     },
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting
+    getFilteredRowModel: getFilteredRowModel()
   });
 
   return (
@@ -63,16 +71,6 @@ function Table({data} : ITable) {
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map(header => (
-              // <th
-              // key={header.id}
-              // onClick={header.column.getToggleSortingHandler()}
-              // >
-              //   {console.log('id:', header.id)}
-              //   {flexRender(
-              //     header.column.columnDef.header,
-              //     header.getContext()
-              //   )}
-              // </th>
               <TableHeader
                 header={header}
                 key={header.id}

@@ -12,7 +12,6 @@ export interface IPet {
   petType: PetType,
   petName: string,
   petBirthDate: string
-  // petBirthDate: Date
 }
 
 export interface IMongoId {

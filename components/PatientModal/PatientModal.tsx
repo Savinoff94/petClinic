@@ -3,13 +3,14 @@ import { Box } from "@mui/material"
 import { type ModalMod } from "./types"
 import { ModalTitle } from "./components/ModalTitle/ModalTitle"
 import { ModalForm } from "./components/ModalForm/ModalForm"
+import { IPatientInitialInfo } from "@/lib/interfaces"
 
 
 interface IPatientModal {
     isOpen: boolean,
     handleClose: () => void,
     mode: ModalMod,
-    patientId: null | string
+    patientId: null | string,
 }
 
 export function PatientModal({isOpen, handleClose, mode, patientId}: IPatientModal) {
@@ -30,7 +31,6 @@ export function PatientModal({isOpen, handleClose, mode, patientId}: IPatientMod
             />
             <ModalForm
                 handleClose={handleClose}
-                handleSubmit={() => {}}
                 patientId={patientId}
             />
             

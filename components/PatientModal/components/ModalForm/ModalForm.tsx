@@ -6,29 +6,29 @@ import { FormControl } from '@mui/material'
 import { MenuItem } from "@mui/material"
 import { petTypes } from "@/lib/interfaces"
 import { IPatientInitialInfo } from '@/lib/interfaces'
-import { usePatients } from '@/hooks/usePatients'
+import { usePatients, usePatientMutations } from '@/hooks/usePatients'
 import { useEffect, useState } from 'react'
 import { SelectChangeEvent } from '@mui/material'
+import { formatDateForInput } from '@/lib/helpers'
+import { FormEvent } from 'react'
 
 interface IModalForm {
     handleClose: () => void,
-    handleSubmit: () => void,
     patientId: string | null
 }
-
-const today = new Date()
 
 const initialPatientInfo: IPatientInitialInfo = {
     name: '',
     phone: '',
     petType: 'dog',
     petName: '',
-    petBirthDate: today.toISOString()
+    petBirthDate: ''
 }
 
 
-export function ModalForm({handleClose, handleSubmit, patientId}: IModalForm) {
+export function ModalForm({handleClose, patientId}: IModalForm) {
     const [patientInfo, setPatientInfo] = useState<IPatientInitialInfo>(initialPatientInfo)
+    const {createPatientQuery, updatePatientQuery} = usePatientMutations()
     const {data} = usePatients()
 
     useEffect(() => {
@@ -56,10 +56,23 @@ export function ModalForm({handleClose, handleSubmit, patientId}: IModalForm) {
             petType: e.target.value as IPatientInitialInfo['petType'],
         }));
     };
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if(!patientId) {
+            createPatientQuery.mutate(patientInfo)
+        }
+        else {
+            updatePatientQuery.mutate({
+                id: patientId,
+                updatedPatient: patientInfo
+            })
+        }
+        handleClose()
+    }
 
     return (
         <form
-            onSubmit={handleSubmit}
+            onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
         >
             <FormControl fullWidth className="mb-4">
                 <FormLabel>Name</FormLabel>
@@ -108,7 +121,7 @@ export function ModalForm({handleClose, handleSubmit, patientId}: IModalForm) {
                 <TextField
                 type="date"
                 variant="outlined"
-                value={patientInfo.petBirthDate}
+                value={formatDateForInput(patientInfo.petBirthDate)}
                 onChange={handleChange("petBirthDate")}
                 required
                 />

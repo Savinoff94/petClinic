@@ -52,7 +52,7 @@ function Table({data, actionClickHandle} : ITable) {
       filterFn: 'includesString',
     },
     {
-      header: "Pet birth date",
+      header: "Pet age",
       accessorKey: "petBirthDate",
       cell: (props) => {
         return <span>{yearsSince(props.getValue() as string)}</span>; 

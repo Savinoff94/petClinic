@@ -14,6 +14,11 @@ export const PetClinicDashboard = () => {
         data={data}
         actionClickHandle={openModal}
       />
+      <button
+        onClick={() => openModal(null)}
+      >
+        Create
+      </button>
       <PatientModal
         isOpen={isOpen}
         handleClose={() =>closeModal()}

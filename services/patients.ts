@@ -9,7 +9,6 @@ export const fetchPatients = async (): Promise<IPatientDashboardInfo[]> => {
       throw new Error('Failed to fetch patients');
     }
     const json = await res.json();
-    console.log(json)
     return json.patients;
 };
 

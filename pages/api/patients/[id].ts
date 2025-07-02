@@ -27,7 +27,6 @@ export default async function handler(
 const del = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id } = req.query;
-    console.log(`ID: ${id}`)
 
     if (!id || typeof id !== "string") {
       return res.status(400).json({ error: "Patient ID is required and must be a string." });

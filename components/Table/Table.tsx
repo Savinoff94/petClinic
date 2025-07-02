@@ -13,6 +13,7 @@ import {
 } from "@tanstack/react-table";
 import { yearsSince } from "@/lib/helpers";
 import { TableHeader } from "./TableHeader/TableHeader";
+import { memo } from "react";
 
 import Paper from '@mui/material/Paper';
 import MuiTable from '@mui/material/Table';
@@ -20,7 +21,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-
 import TableRow from '@mui/material/TableRow';
 
 interface ITable {
@@ -129,4 +129,4 @@ function Table({data, actionClickHandle} : ITable) {
   );
 }
 
-export default Table;
+export default memo(Table);

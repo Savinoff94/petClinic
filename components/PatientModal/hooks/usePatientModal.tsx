@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { useCallback } from 'react';
 
 type ModalState = {
   patientId: string | null;
@@ -28,13 +29,13 @@ const modalReducer = (state: ModalState, action: ModalAction): ModalState => {
 export function usePatientModal() {
   const [state, dispatch] = useReducer(modalReducer, initialState);
 
-  const openModal = (id?: string | null) => {
+  const openModal = useCallback((id?: string | null) => {
     dispatch({ type: 'OPEN_MODAL', payload: id });
-  };
+  }, [dispatch]);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     dispatch({ type: 'CLOSE_MODAL' });
-  };
+  }, [dispatch]);
 
   return {
     isOpen: state.isOpen,

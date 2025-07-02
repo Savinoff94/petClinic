@@ -92,8 +92,8 @@ function Table({data, actionClickHandle} : ITable) {
   });
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper className="font-mono w-full overflow-hidden">
+      <TableContainer className="max-h-[440px] md:max-h-[640px]">
       <MuiTable stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

@@ -9,7 +9,7 @@ function Arrows({
 }: IArrowsProp) {
     return (
         <div
-            className="flex flex-col"
+            className="flex p-1 hover:bg-slate-200 ease-in transition duration-300 rounded"
         >
             {
                 !direction && <><ArrowBack fontSize="small" /></>

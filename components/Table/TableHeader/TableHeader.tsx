@@ -107,7 +107,7 @@ function TableHeaderMenuFilter<TData extends object, TValue>({
                 header.getContext()
             )}
             <FloatingMenu
-            achorContent={<FilterList fontSize="small"/>}
+            achorContent={<FilterList className='hover:bg-slate-200 ease-in transition duration-300 rounded' fontSize="small"/>}
             >
                 {
                     petTypes.map((petType) => (

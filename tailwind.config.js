@@ -16,6 +16,9 @@ module.exports = {
       gridTemplateRows: {
         "auto-1fr": "auto 1fr",
       },
+      backgroundImage: {
+        'main': "url('/pets_1.jpg')",
+      },
     },
   },
   plugins: [],

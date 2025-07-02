@@ -5,9 +5,6 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      primary: "#4D4DFE",
-    },
     fontFamily: {
       mono: ["Roboto", "monospace"],
       sans: ["Roboto", "sans-serif"],

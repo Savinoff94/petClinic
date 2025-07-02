@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { IPatientDashboardInfo } from "@/lib/interfaces";
+import { IPatientDashboardInfo, ILeanPatientDashboardInfo } from "@/lib/interfaces";
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "@/lib/db";
 import { PatientModel } from "@/lib/models/Patient";
@@ -13,14 +13,13 @@ export default async function handler(
   res: NextApiResponse<PatientResult>,
 ) {
   await db()
+  console.log("HERE")
+  console.log("WWW", req.method)
   if (req.method === "POST") {
     return await create(req, res);
   }
   if (req.method === "GET") {
     return await read(req, res);
-  }
-  if (req.method === "DELETE") {
-    return await del(req, res);
   }
 }
 
@@ -28,9 +27,13 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   // create patient
 };
 const read = async (req: NextApiRequest, res: NextApiResponse) => {
-  const patients = await PatientModel.find();
-  res.status(200).json({ patients });
-};
-const del = async (req: NextApiRequest, res: NextApiResponse) => {
-  // delete from database
+  const patients = await PatientModel.find().lean<ILeanPatientDashboardInfo[]>();
+
+  const patientsWithId = patients.map((patient) => ({
+    ...patient,
+    id: patient._id.toString(),
+    _id: undefined
+  }));
+
+  res.status(200).json({ patients: patientsWithId });
 };

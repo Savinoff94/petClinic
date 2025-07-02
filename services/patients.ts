@@ -1,15 +1,28 @@
-import { IPatient } from "@/lib/interfaces";
+import { IPatientDashboardInfo } from "@/lib/interfaces";
 import { dashboardData } from "@/lib/dashboardData";
 
-export const fetchPatients = async (): Promise<IPatient[]> => {
+export const fetchPatients = async (): Promise<IPatientDashboardInfo[]> => {
     const res = await fetch('/api/patients', {
-        method: "GET"
+      method: "GET"
     });
     if (!res.ok) {
       throw new Error('Failed to fetch patients');
     }
     const json = await res.json();
+    console.log(json)
     return json.patients;
+};
+
+export const deletePatient = async (id: string): Promise<void> => {
+  const res = await fetch(`/api/patients/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to delete patient with id ${id}`);
+  }
+
+  console.log(`Patient with id ${id} deleted successfully`);
 };
 
 export const seedPatients = async () => {

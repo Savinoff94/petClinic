@@ -1,4 +1,5 @@
-import { IPatient } from "@/lib/interfaces";
+import { IPatientDashboardInfo } from "@/lib/interfaces";
+import { ActionCell } from "./ActionCell/ActionCell";
 import { useMemo, useState } from "react";
 import {
   useReactTable,
@@ -23,16 +24,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 interface ITable {
-  data: IPatient[]
+  data: IPatientDashboardInfo[],
+  actionClickHandle: (id:string) => void
 }
 
 
-function Table({data} : ITable) {
+function Table({data, actionClickHandle} : ITable) {
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
  
-  const columns = useMemo<ColumnDef<IPatient>[]>(() => [
+  const columns = useMemo<ColumnDef<IPatientDashboardInfo>[]>(() => [
     {
       header: "Patient name",
       accessorKey: "name",
@@ -64,8 +66,16 @@ function Table({data} : ITable) {
         const cellValue = String(row.getValue(columnId));
         return filterValue.includes(cellValue);
       },
+    },
+    {
+      header: "Actions",
+      id: "actions",
+      cell: ({ row }) => {
+        const patient = row.original;
+        return <ActionCell onClickHandle={() => actionClickHandle(patient.id)}/>;
+      },
     }
-  ], [])
+  ], [actionClickHandle])
 
   const table = useReactTable({
     columns,

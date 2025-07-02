@@ -1,4 +1,4 @@
-import { PetClinicDashboard } from "@/components/pet-clinic-dashboard";
+import { PetClinicDashboard } from "@/components/PetClinicDashboard";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { NextPage } from "next";
 

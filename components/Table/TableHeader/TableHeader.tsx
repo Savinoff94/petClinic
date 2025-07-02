@@ -8,7 +8,7 @@ import { FormControlLabel } from '@mui/material';
 import { Checkbox } from '@mui/material';
 import Arrows from './Arrows/Arrows';
 import { TextField } from '@mui/material';
-import FloatingMenu from '../FloatingMenu/FloatingMenu';
+import FloatingMenu from '../../FloatingMenu/FloatingMenu';
 import { FilterList } from '@mui/icons-material';
 import { petTypes } from '@/lib/interfaces';
 import { useState } from 'react';

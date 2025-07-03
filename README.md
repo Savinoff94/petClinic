@@ -1,3 +1,42 @@
+## Design Decisions
+
+Below are some key design decisions I made while working on this React/Next.js TypeScript application:
+
+- **Recommended Packages**  
+  I used widely recommended packages, These packages often encourage certain project structures and coding patterns, which I found helpful for keeping the project organized
+
+- **Sorting and Filtering**  
+  One important decision was whether to handle sorting and filtering on the frontend or backend. Each option has trade-offs, but since I was advised to handle this on the frontend, I focused on optimizing client-side operations instead
+- **`<TableHeader>` Variants**  
+  The `<TableHeader>` component in the app has three distinct variants with different markup requirements. Although they share similar props, I decided to split them into three separate subcomponents. I felt that combining them into a single component would have resulted in too much conditional logic, which could make the code harder to read and maintain.
+
+- **Modal Logic for Create/Update**  
+  For the modal, I combined the logic for both creation and updating since they share almost identical behavior. However, I broke it down into smaller, reusable parts, such as separate `Title` and `Form` components, to keep each piece focused and maintainable.
+
+- **Performance Optimizations**  
+  I made sure to memoize the `<Table>` component and its props. This prevents unnecessary re-renders of one of the largest components on the page whenever the user opens or closes the modal.
+
+- **Component Folder Structure**  
+  For larger components, I often use a folder structure like:
+  ComponentName/
+    hooks/
+    components/
+    ComponentName.tsx
+  This helps keep custom hooks, subcomponents, and the main component close to each other, making the codebase easier to read and maintain.
+
+  ## Possible Improvements
+
+Here are a few improvements I’ve identified for the project:
+
+- **Virtualize the Table**  
+  Implementing table virtualization would allow the app to handle much larger data sets efficiently by rendering only the visible rows, which would significantly improve performance.
+
+- **Optimistic Updates**  
+  Using optimistic updates with `useQuery` would make the app feel more responsive by immediately reflecting changes in the UI before the server confirms them.
+
+- **Delete Confirmation Modal**  
+  Adding a confirmation modal like *“Are you sure you want to delete this patient?”* would help prevent accidental deletions and improve the user experience.
+
 # Pet Clinic
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

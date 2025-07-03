@@ -24,6 +24,9 @@ Below are some key design decisions I made while working on this React/Next.js T
     ComponentName.tsx
   This helps keep custom hooks, subcomponents, and the main component close to each other, making the codebase easier to read and maintain.
 
+- **No SSR for the Table**
+  I chose not to use Server-Side Rendering (SSR) for the table because it contains personal information about our users, and this page is also the main entry point of the app. Every time the page loads, a large amount of data would have to be fetched and rendered on the server. To avoid unnecessary server load and to improve perceived performance, I decided to handle this process entirely on the client side instead. This separation makes the page load feel faster and keeps sensitive data handling more controlled.
+
   ## Possible Improvements
 
 Here are a few improvements I’ve identified for the project:

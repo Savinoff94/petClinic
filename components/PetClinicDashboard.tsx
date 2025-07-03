@@ -3,7 +3,7 @@ import { PatientModal } from "./PatientModal/PatientModal";
 import { usePatientModal } from "./PatientModal/hooks/usePatientModal";
 import Table from "./Table/Table";
 import { Button } from "@mui/material";
-import { Title } from "@mui/icons-material";
+import { Title } from "./Title/Title";
 
 export const PetClinicDashboard = () => {
   const {data} = usePatients()

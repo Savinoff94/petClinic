@@ -4,9 +4,10 @@ import { usePatientModal } from "./PatientModal/hooks/usePatientModal";
 import Table from "./Table/Table";
 import { Button } from "@mui/material";
 import { Title } from "./Title/Title";
+import { CircularProgress } from "@mui/material";
 
 export const PetClinicDashboard = () => {
-  const {data} = usePatients()
+  const {data, isLoading} = usePatients()
   const { isOpen, patientId, openModal, closeModal } = usePatientModal()
   return (
     <div className="h-screen w-screen text-gray-600 font-mono bg-main">
@@ -16,6 +17,7 @@ export const PetClinicDashboard = () => {
           data={data}
           actionClickHandle={openModal}
         />
+        {isLoading && <div className="w-full flex justify-center pt-2"><CircularProgress /></div>}
         <Button
           className="bg-slate-200 text-gray-600 font-mono hover:bg-slate-300 ease-in"
           variant="contained"

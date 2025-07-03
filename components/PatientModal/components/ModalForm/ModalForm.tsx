@@ -22,7 +22,7 @@ const initialPatientInfo: IPatientInitialInfo = {
     phone: '',
     petType: 'dog',
     petName: '',
-    petBirthDate: ''
+    petBirthDate: new Date()
 }
 
 

@@ -11,7 +11,7 @@ export type PetType = typeof petTypes[number]
 export interface IPet {
   petType: PetType,
   petName: string,
-  petBirthDate: string
+  petBirthDate: Date
 }
 
 export interface IMongoId {
